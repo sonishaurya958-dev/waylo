@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f5ed" />
+  <title>Waylo — Trips That Fit You</title>
+  <meta name="description" content="Waylo is an AI-powered travel planning experience that shapes trips around your budget, interests and travel style." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="Waylo home">
+      <span class="brand-mark"><span></span><i></i></span>
+      <span>Waylo</span>
+    </a>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#destinations">Explore</a>
+      <a href="#about">Why Waylo</a>
+    </nav>
+    <a class="nav-cta" href="#planner">Plan a trip <span>↗</span></a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span class="spark">✦</span> AI-powered travel planning</div>
+        <h1>Your trip.<br><em>Your budget.</em><br>Your way.</h1>
+        <p>Tell Waylo where you want to go, what you love and what you want to spend. We shape the journey around you.</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#planner">Plan my trip <span>→</span></a>
+          <a class="text-btn" href="#how">See how it works <span>↓</span></a>
+        </div>
+        <div class="trust-row"><span>For curious travellers</span><b>•</b><span>Built around your budget</span><b>•</b><span>Made personal</span></div>
+      </div>
+
+      <div class="hero-scene">
+        <div class="orb-shadow"></div>
+        <div id="globe" class="globe-canvas"></div>
+        <div class="route-card floating-card">
+          <div class="route-top"><span class="mini-pin">●</span><span>YOUR NEXT ESCAPE</span><b>AI</b></div>
+          <div class="route-name">Mumbai <span>→</span> Goa</div>
+          <div class="route-meta"><span>4 days</span><span>₹12,500</span><span>3 travellers</span></div>
+        </div>
+        <div class="pin-dot pin-one"></div>
+        <div class="pin-dot pin-two"></div>
+        <div class="plane">✈</div>
+      </div>
+    </section>
+
+    <section class="marquee">
+      <div class="marquee-track">
+        <span>PLAN LESS. TRAVEL MORE.</span><i>✦</i><span>BUILT AROUND YOU.</span><i>✦</i><span>PLAN LESS. TRAVEL MORE.</span><i>✦</i><span>BUILT AROUND YOU.</span><i>✦</i>
+      </div>
+    </section>
+
+    <section class="intro section-pad" id="how">
+      <div class="section-kicker">01 / THE IDEA</div>
+      <div class="intro-grid">
+        <h2>Travel planning shouldn't feel like another <span>project.</span></h2>
+        <div>
+          <p>Waylo turns a blank itinerary into a trip that actually feels like yours — balancing what you want to experience with what you can spend.</p>
+          <a class="arrow-link" href="#planner">Start with your preferences <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="journey">
+      <div class="journey-stage">
+        <div class="journey-copy reveal">
+          <div class="section-kicker light">02 / THE WAYLO FLOW</div>
+          <h2>From <em>“where should we go?”</em> to <span>“let's go.”</span></h2>
+          <p>Three simple inputs. One personalized journey.</p>
+        </div>
+        <div class="journey-orbit">
+          <div class="orbit-ring ring-a"></div>
+          <div class="orbit-ring ring-b"></div>
+          <div class="orbit-ring ring-c"></div>
+          <div class="orbit-core"><span>W</span></div>
+          <div class="orbit-label label-a"><small>01</small><strong>Tell us</strong><span>budget + vibe</span></div>
+          <div class="orbit-label label-b"><small>02</small><strong>Waylo thinks</strong><span>your route + stays</span></div>
+          <div class="orbit-label label-c"><small>03</small><strong>You go</strong><span>your trip, your way</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="planner section-pad" id="planner">
+      <div class="section-kicker">03 / PLAN A TRIP</div>
+      <div class="planner-head">
+        <div><h2>Let's build your <span>escape.</span></h2><p>This is a prototype — choose a few preferences and watch Waylo shape a trip.</p></div>
+        <div class="step-count">01 <span>/</span> 04</div>
+      </div>
+      <div class="planner-card">
+        <div class="planner-progress"><span></span></div>
+        <div class="question">
+          <div class="q-number">01</div>
+          <div class="q-body">
+            <label>Where do you want to go?</label>
+            <div class="destination-input"><span>⌖</span><input value="Goa, India" aria-label="Destination" /><span class="input-hint">or surprise me</span></div>
+          </div>
+        </div>
+        <div class="question-grid">
+          <div class="q-block"><label>What's your budget?</label><div class="chips"><button class="chip active">₹5–10k</button><button class="chip">₹10–20k</button><button class="chip">₹20–40k</button></div></div>
+          <div class="q-block"><label>What's your vibe?</label><div class="chips"><button class="chip active">Beach</button><button class="chip">Adventure</button><button class="chip">Culture</button></div></div>
+        </div>
+        <div class="planner-footer"><span>✦ Waylo will balance the details for you.</span><button class="generate-btn" id="generate">Generate my trip <span>→</span></button></div>
+      </div>
+    </section>
+
+    <section class="destinations section-pad" id="destinations">
+      <div class="section-kicker">04 / INSPIRE ME</div>
+      <div class="dest-head"><h2>Somewhere <span>you.</span></h2><p>Trips that fit different moods, budgets and kinds of weekends.</p></div>
+      <div class="destination-grid">
+        <article class="destination-card large"><div class="dest-image goa"></div><div class="dest-overlay"><span>BEACH / 4 DAYS</span><h3>Goa</h3><p>Slow mornings, loud sunsets.</p></div></article>
+        <article class="destination-card"><div class="dest-image jaipur"></div><div class="dest-overlay"><span>CULTURE / 3 DAYS</span><h3>Jaipur</h3><p>Colour, cafés & old streets.</p></div></article>
+        <article class="destination-card"><div class="dest-image rishikesh"></div><div class="dest-overlay"><span>ADVENTURE / 3 DAYS</span><h3>Rishikesh</h3><p>River air, mountain energy.</p></div></article>
+      </div>
+    </section>
+
+    <section class="result-preview">
+      <div class="result-copy">
+        <div class="section-kicker light">05 / THE RESULT</div>
+        <h2>A trip that feels like <em>you</em> planned it.</h2>
+        <p>Waylo's future itinerary experience will turn your choices into a day-by-day plan, with estimated spending and room to change anything you don't love.</p>
+        <a class="primary-btn light-btn" href="#planner">Try the planner <span>→</span></a>
+      </div>
+      <div class="itinerary-card">
+        <div class="it-top"><div><span>YOUR WAYLO TRIP</span><h3>Goa, India</h3></div><b>₹12,500</b></div>
+        <div class="days"><div class="day active"><small>DAY 01</small><strong>Beach & slow living</strong><span>₹2,850</span></div><div class="day"><small>DAY 02</small><strong>Old Goa + sunset</strong><span>₹3,200</span></div><div class="day"><small>DAY 03</small><strong>Island day</strong><span>₹3,450</span></div></div>
+        <div class="it-bottom"><span>✦ Built around your ₹10–20k budget</span><span>4.9h / 5h travel time saved</span></div>
+      </div>
+    </section>
+
+    <section class="about section-pad" id="about">
+      <div class="section-kicker">06 / WHY WAYLO</div>
+      <div class="about-grid"><h2>Less tab-hopping.<br><span>More memories.</span></h2><p>Instead of piecing together flights, stays, activities and budgets across endless tabs, Waylo is designed to bring the decisions into one simple flow — personal, visual and easy to change.</p></div>
+    </section>
+  </main>
+
+  <footer><div class="footer-brand"><span class="brand-mark"><span></span><i></i></span><strong>Waylo</strong></div><span>Trips That Fit You</span><span>Prototype · 2026</span></footer>
+
+  <div class="modal" id="modal"><div class="modal-card"><button class="close" id="close">×</button><div class="modal-icon">✦</div><div class="section-kicker">WAYLO AI</div><h2>Shaping your trip...</h2><p>Finding a balance between beach time, experiences and your ₹10–20k budget.</p><div class="loading"><span></span></div><div class="fake-result"><span>✓</span> 4-day Goa itinerary ready</div><button class="primary-btn" id="viewTrip">View my trip →</button></div></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
