@@ -1,4 +1,5 @@
 const globeEl=document.getElementById("globe");
+if(!window.THREE){ console.error("Waylo: Three.js failed to load"); }
 const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(32,globeEl.clientWidth/globeEl.clientHeight,.1,100);
 camera.position.set(0,0,7);
@@ -28,43 +29,64 @@ const travelGroup=new THREE.Group();
 group.add(travelGroup);
 
 const plane3D=new THREE.Group();
-const fuselage=new THREE.Mesh(
-  new THREE.CapsuleGeometry(.07,.55,6,12),
-  new THREE.MeshStandardMaterial({color:0xf9a52b,roughness:.35,metalness:.25})
-);
-fuselage.rotation.z=Math.PI/2;
-plane3D.add(fuselage);
 
-const wingMat=new THREE.MeshStandardMaterial({color:0xffffff,roughness:.3,metalness:.1});
-const wing=new THREE.Mesh(new THREE.BoxGeometry(.48,.035,.11),wingMat);
-wing.position.set(0,0,0);
+const planeBody=new THREE.Mesh(
+  new THREE.CylinderGeometry(.075,.075,.62,16),
+  new THREE.MeshStandardMaterial({color:0xf9a52b,roughness:.28,metalness:.35})
+);
+planeBody.rotation.z=Math.PI/2;
+plane3D.add(planeBody);
+
+const wing=new THREE.Mesh(
+  new THREE.BoxGeometry(.55,.035,.13),
+  new THREE.MeshStandardMaterial({color:0xffffff,roughness:.22,metalness:.18})
+);
 plane3D.add(wing);
-const tail=new THREE.Mesh(new THREE.BoxGeometry(.18,.025,.08),wingMat);
-tail.position.x=-.27;
-plane3D.add(tail);
-plane3D.scale.setScalar(.8);
+
+const tailWing=new THREE.Mesh(
+  new THREE.BoxGeometry(.18,.025,.08),
+  new THREE.MeshStandardMaterial({color:0xffffff,roughness:.22,metalness:.18})
+);
+tailWing.position.x=-.26;
+plane3D.add(tailWing);
+
+const nose=new THREE.Mesh(
+  new THREE.SphereGeometry(.078,16,12),
+  new THREE.MeshStandardMaterial({color:0xf9a52b,roughness:.28,metalness:.35})
+);
+nose.position.x=.31;
+plane3D.add(nose);
+
+plane3D.scale.setScalar(.85);
 travelGroup.add(plane3D);
 
 const luggage=new THREE.Group();
 const bagBody=new THREE.Mesh(
-  new THREE.BoxGeometry(.24,.34,.16),
-  new THREE.MeshStandardMaterial({color:0x087b70,roughness:.5,metalness:.1})
+  new THREE.BoxGeometry(.25,.34,.18),
+  new THREE.MeshStandardMaterial({color:0x087b70,roughness:.42,metalness:.15})
 );
 luggage.add(bagBody);
+
 const handle=new THREE.Mesh(
-  new THREE.TorusGeometry(.08,.012,8,20,Math.PI),
-  new THREE.MeshStandardMaterial({color:0xf9a52b,roughness:.4,metalness:.2})
+  new THREE.TorusGeometry(.075,.012,8,20,Math.PI),
+  new THREE.MeshStandardMaterial({color:0xf9a52b,roughness:.35,metalness:.25})
 );
 handle.rotation.z=Math.PI/2;
 handle.position.y=.2;
 luggage.add(handle);
+
 luggage.position.set(-2.15,-.75,.15);
 luggage.scale.setScalar(.8);
 travelGroup.add(luggage);
 
 const routeOrb=new THREE.Mesh(
-  new THREE.SphereGeometry(.055,20,20),
-  new THREE.MeshStandardMaterial({color:0xf9a52b,emissive:0x7a3d00,emissiveIntensity:.7})
+  new THREE.SphereGeometry(.07,20,20),
+  new THREE.MeshStandardMaterial({
+    color:0xf9a52b,
+    emissive:0xf9a52b,
+    emissiveIntensity:1.1,
+    roughness:.2
+  })
 );
 travelGroup.add(routeOrb);
 
