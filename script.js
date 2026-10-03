@@ -23,6 +23,51 @@ const atmosphere=new THREE.Mesh(
   new THREE.MeshBasicMaterial({color:0x8fd77c,transparent:true,opacity:.12,side:THREE.BackSide})
 );
 group.add(atmosphere);
+/* Visible 3D travel objects */
+const travelGroup=new THREE.Group();
+group.add(travelGroup);
+
+const plane3D=new THREE.Group();
+const fuselage=new THREE.Mesh(
+  new THREE.CapsuleGeometry(.07,.55,6,12),
+  new THREE.MeshStandardMaterial({color:0xf9a52b,roughness:.35,metalness:.25})
+);
+fuselage.rotation.z=Math.PI/2;
+plane3D.add(fuselage);
+
+const wingMat=new THREE.MeshStandardMaterial({color:0xffffff,roughness:.3,metalness:.1});
+const wing=new THREE.Mesh(new THREE.BoxGeometry(.48,.035,.11),wingMat);
+wing.position.set(0,0,0);
+plane3D.add(wing);
+const tail=new THREE.Mesh(new THREE.BoxGeometry(.18,.025,.08),wingMat);
+tail.position.x=-.27;
+plane3D.add(tail);
+plane3D.scale.setScalar(.8);
+travelGroup.add(plane3D);
+
+const luggage=new THREE.Group();
+const bagBody=new THREE.Mesh(
+  new THREE.BoxGeometry(.24,.34,.16),
+  new THREE.MeshStandardMaterial({color:0x087b70,roughness:.5,metalness:.1})
+);
+luggage.add(bagBody);
+const handle=new THREE.Mesh(
+  new THREE.TorusGeometry(.08,.012,8,20,Math.PI),
+  new THREE.MeshStandardMaterial({color:0xf9a52b,roughness:.4,metalness:.2})
+);
+handle.rotation.z=Math.PI/2;
+handle.position.y=.2;
+luggage.add(handle);
+luggage.position.set(-2.15,-.75,.15);
+luggage.scale.setScalar(.8);
+travelGroup.add(luggage);
+
+const routeOrb=new THREE.Mesh(
+  new THREE.SphereGeometry(.055,20,20),
+  new THREE.MeshStandardMaterial({color:0xf9a52b,emissive:0x7a3d00,emissiveIntensity:.7})
+);
+travelGroup.add(routeOrb);
+
 
 const points=[];
 for(let i=0;i<150;i++){
@@ -74,6 +119,14 @@ function animate(){
   const t=performance.now()*.001;
 
   const p=scrollProgress;
+  const travelT=(t*.55+p*7)%Math.PI*2;
+  plane3D.position.set(Math.cos(travelT)*2.05, Math.sin(travelT*1.25)*.85, Math.sin(travelT)*.7);
+  plane3D.rotation.y=-travelT+Math.PI/2;
+  plane3D.rotation.z=Math.sin(travelT*1.25)*.12;
+  luggage.position.y=-.75+Math.sin(t*1.8)*.12;
+  luggage.rotation.y=t*.7+p*3;
+  routeOrb.position.set(Math.cos(t*.8)*1.65,Math.sin(t*.8)*.55,.7);
+  travelGroup.rotation.y=p*1.8;
   group.rotation.y += .002;
   group.rotation.y += (p*2.7 + targetX - group.rotation.y)*.035;
   group.rotation.x += (targetY + Math.sin(t*.7)*.035 - group.rotation.x)*.025;
