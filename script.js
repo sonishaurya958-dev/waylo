@@ -55,31 +55,57 @@ window.addEventListener("mousemove",e=>{
 });
 
 function updateScroll(){
-  const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);
-  scrollProgress=Math.min(1,Math.max(0,scrollY/max));
+  const hero=document.querySelector(".hero");
+  if(!hero)return;
+  const rect=hero.getBoundingClientRect();
+  const range=Math.max(1,hero.offsetHeight-innerHeight);
+  scrollProgress=Math.min(1,Math.max(0,-rect.top/range));
 }
 window.addEventListener("scroll",updateScroll,{passive:true});
 updateScroll();
+
+const plane=document.querySelector(".plane");
+const pinOne=document.querySelector(".pin-one");
+const pinTwo=document.querySelector(".pin-two");
+const routeCard=document.querySelector(".floating-card");
 
 function animate(){
   requestAnimationFrame(animate);
   const t=performance.now()*.001;
 
-  group.rotation.y += .0018;
-  group.rotation.y += (targetX + scrollProgress*1.05 - group.rotation.y)*.018;
-  group.rotation.x += (targetY + Math.sin(t*.45)*.025 - group.rotation.x)*.018;
+  const p=scrollProgress;
+  group.rotation.y += .002;
+  group.rotation.y += (p*2.7 + targetX - group.rotation.y)*.035;
+  group.rotation.x += (targetY + Math.sin(t*.7)*.035 - group.rotation.x)*.025;
 
-  const scale=1 + Math.sin(t*1.2)*.018 + scrollProgress*.08;
+  const scale=1 + Math.sin(t*1.4)*.015 + p*.18;
   group.scale.setScalar(scale);
 
   const sceneEl=document.querySelector(".hero-scene");
   if(sceneEl){
-    sceneEl.style.transform=`translate3d(0,${scrollProgress*-90}px,0) scale(${1+scrollProgress*.035})`;
+    const x=p*210;
+    const y=-p*120;
+    const r=p*18;
+    sceneEl.style.transform=`translate3d(${x}px,${y}px,0) rotate(${r}deg) scale(${1+p*.08})`;
+    sceneEl.style.opacity=String(1-p*.38);
+  }
+
+  if(plane){
+    const x=-10 + p*120;
+    const y=35 - p*100;
+    plane.style.transform=`translate3d(${x}px,${y}px,0) rotate(${-12+p*30}deg) scale(${1+p*.25})`;
+  }
+
+  if(pinOne) pinOne.style.transform=`translate3d(${p*35}px,${p*-25}px,0) scale(${1+p*.7})`;
+  if(pinTwo) pinTwo.style.transform=`translate3d(${p*-45}px,${p*30}px,0) scale(${1+p*.5})`;
+  if(routeCard){
+    routeCard.style.transform=`translate3d(${p*-120}px,${p*110}px,0) rotate(${2-p*8}deg)`;
+    routeCard.style.opacity=String(1-p*.75);
   }
 
   const orbit=document.querySelector(".journey-orbit");
   if(orbit){
-    orbit.style.transform=`translate3d(0,${(scrollProgress-.22)*-70}px,0) rotate(${scrollProgress*8}deg)`;
+    orbit.style.transform=`translate3d(0,${p*-35}px,0) rotate(${p*28}deg) scale(${1+p*.06})`;
   }
 
   renderer.render(scene,camera);
